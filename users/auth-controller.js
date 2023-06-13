@@ -1,7 +1,5 @@
 import * as usersDao from "./users-dao.js";
 
-// var currentUserVar;
-
 const AuthController = (app) => {
     const register = (req, res) => {
         const username = req.body.username;

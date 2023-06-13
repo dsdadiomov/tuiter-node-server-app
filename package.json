@@ -10,10 +10,9 @@
   },
   "keywords": [
     "Node",
-    "Express",
+    "Server",
     "REST",
-    "Web",
-    "API"
+    "HTTP"
   ],
   "author": "David",
   "license": "ISC",
