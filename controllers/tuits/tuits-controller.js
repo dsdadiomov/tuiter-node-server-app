@@ -3,21 +3,13 @@ let tuits = posts;
 
 const createTuit = (req, res) => {
   const newTuit = req.body;
-  newTuit._id = new Date().getTime() + "";
-  newTuit.topic = "Space";
-  newTuit.username = "Stitch";
-  newTuit.handle = "@stitchSpaceEnthusiast";
-  newTuit.time = "2h";
-  newTuit.image = "stitch1.jpg";
-  newTuit.title = "Stitch Space Enthusiast";
-  newTuit.replies = 0;
-  newTuit.retuits = 0;
+  newTuit._id = (new Date()).getTime()+'';
   newTuit.likes = 0;
   newTuit.liked = false;
-  newTuit.dislikes = 0;
   tuits.push(newTuit);
   res.json(newTuit);
-};
+}
+
 const findTuits = (req, res) => {
   res.json(tuits);
 };

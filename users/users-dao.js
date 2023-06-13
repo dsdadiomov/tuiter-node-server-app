@@ -1,4 +1,3 @@
-// data model to store user info locally in memory (will be replaced by database later)
 let users = [];
 
 export const findAllUsers = () => users;
