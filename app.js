@@ -1,30 +1,46 @@
-
-import express from "express"; 
-import HelloController from "./controllers/hello-controller.js";
-import UserController from "./users/users-controller.js";
+import express from 'express'
 import TuitsController from "./controllers/tuits/tuits-controller.js";
 import AuthController from "./users/auth-controller.js";
-import cors from "cors";
+import HelloController from "./controllers/hello-controller.js"
+import UserController from "./users/users-controller.js"
+import mongoose from "mongoose";
+import dotenv from "dotenv"
 import session from "express-session";
+import cors from 'cors'
 
-const app = express();
-app.use(express.json()); 
+dotenv.config()
+
+const app = express()
 app.use(
-  cors({
-    credentials: true,
-    origin: "https://idyllic-sunshine-7e8711.netlify.app",
-  }),
-  session({
-    secret: "any string",
-    resave: false,
-    saveUninitialized: true,
-    store: new session.MemoryStore()
-  })
+    session({
+        secret: "any string",
+        resave: false,
+        saveUninitialized: true,
+    })
+);
+app.use(
+    cors({
+        credentials: true,
+        origin: '*'
+    })
 );
 
-HelloController(app);
-UserController(app);
+app.use(express.json())
+
+HelloController(app)
+UserController(app)
 TuitsController(app);
 AuthController(app);
 
-app.listen(process.env.PORT || 4000);
+const port = process.env.PORT || 4000;
+app.listen(port)
+
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
+mongoose.connect(CONNECTION_STRING).then(
+    () => { 
+       console.log("Connected to the database");
+   },
+    err => { 
+      console.log(err);
+   }
+  );
