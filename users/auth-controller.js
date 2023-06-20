@@ -31,19 +31,30 @@ const AuthController = (app) => {
 
     const profile = (req, res) => {
         const currentUser = req.session["currentUser"];
+        
+        console.log(currentUser);
         if (!currentUser) {
-            res.sendStatus(404);
-            return;
+          res.sendStatus(404);
+          return;
         }
         res.json(currentUser);
-    };
+      };
 
     const logout = async (req, res) => {
         req.session.destroy();
         res.sendStatus(200);
     };
 
-    const update = (req, res) => { };
+    const update   = async (req, res) => { 
+        console.log('update', req.body)
+    
+        const id = req.params.uid;
+        console.log("\n\n\n ", id, req.body);
+        const newUser = await usersDao.updateUser(id,req.body.user);
+        
+        console.log(newUser);
+        req.session["currentUser"] = newUser;
+        res.json(newUser);};
 
     app.post("/api/users/register", register);
     app.post("/api/users/login", login);

@@ -8,6 +8,7 @@ import dotenv from "dotenv"
 import session from "express-session";
 import cors from 'cors'
 
+
 dotenv.config()
 
 const app = express()
@@ -21,9 +22,8 @@ app.use(
 app.use(
     cors({
         credentials: true,
-        origin: '*'
-    })
-);
+        origin: "https://idyllic-sunshine-7e8711.netlify.app/",
+      }));
 
 app.use(express.json())
 
