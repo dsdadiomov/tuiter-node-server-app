@@ -8,15 +8,19 @@ import AuthController from "./users/auth-controller.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv"
 
+
 dotenv.config()
 
+const CONNECTION_STRING = 'mongodb://127.0.0.1:27017/tuiter';
+mongoose.connect(CONNECTION_STRING);
 const app = express()
 app.use(
   cors({
       credentials: true,
-      origin:  'https://idyllic-sunshine-7e8711.netlify.app/tuiter'
+      origin:  'http://localhost:3000'
   })
 );
+
 app.use(
     session({
         secret: "any string",
@@ -34,7 +38,7 @@ AuthController(app);
 const port = process.env.PORT || 4000;
 app.listen(port)
 
-const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
+
 mongoose.connect(CONNECTION_STRING).then(
     () => { 
        console.log("Connected!");
